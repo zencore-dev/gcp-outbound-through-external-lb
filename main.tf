@@ -63,11 +63,6 @@ resource "google_compute_address" "external" {
   depends_on = [google_project_service.compute]
 }
 
-resource "google_compute_address" "external2" {
-  name       = "external-ip2"
-  depends_on = [google_project_service.compute]
-}
-
 resource "google_compute_instance" "workload" {
   machine_type = "e2-micro"
   name         = "workload"
