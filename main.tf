@@ -1,5 +1,8 @@
 resource "google_project_service" "compute" {
   service = "compute.googleapis.com"
+  provisioner "local-exec" {
+    command = "gcloud -q compute networks delete default --project=${var.project_id}"
+  }
 }
 
 data "google_compute_zones" "main" {
