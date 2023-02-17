@@ -1,7 +1,10 @@
 resource "google_project_service" "compute" {
   service = "compute.googleapis.com"
   provisioner "local-exec" {
-    command = "gcloud -q compute networks delete default --project=${var.project_id}"
+    command = <<-EOT
+      gcloud compute firewall-rules list --format 'value(name)' --project=${var.project_id} | xargs gcloud compute firewall-rules delete -q
+      gcloud -q compute networks delete default --project=${var.project_id}"
+    EOT
   }
 }
 
