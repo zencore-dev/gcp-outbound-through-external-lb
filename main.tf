@@ -13,15 +13,17 @@ data "google_compute_zones" "main" {
 }
 
 resource "google_compute_network" "untrusted" {
-  name                    = "untrusted"
-  auto_create_subnetworks = false
-  depends_on              = [google_project_service.compute]
+  name                            = "untrusted"
+  auto_create_subnetworks         = false
+  delete_default_routes_on_create = true
+  depends_on                      = [google_project_service.compute]
 }
 
 resource "google_compute_network" "trusted" {
-  name                    = "trusted"
-  auto_create_subnetworks = false
-  depends_on              = [google_project_service.compute]
+  name                            = "trusted"
+  auto_create_subnetworks         = false
+  delete_default_routes_on_create = true
+  depends_on                      = [google_project_service.compute]
 }
 
 resource "google_compute_subnetwork" "untrusted" {
